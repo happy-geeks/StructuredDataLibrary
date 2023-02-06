@@ -131,7 +131,6 @@ class EnhancedEcommerceService {
     bindClickEcommerceEvent(eventName, dataSchema, initiatorSelector = "", defaultEcommerceSchema = true, stopPropagation = false) {
         const initiators = document.querySelectorAll(dataSchema.itemContainerSelector);
         initiators.forEach(initiator => {
-            const elementToBind = initiatorSelector === "" ? initiator : initiator.querySelector(initiatorSelector);
             let elementsToBind = [];
             initiatorSelector === "" ?  elementsToBind.push(initiator) : elementsToBind = initiator.querySelectorAll(initiatorSelector);
             elementsToBind.forEach(elementToBind => {
@@ -185,7 +184,7 @@ class EnhancedEcommerceService {
                     if(stopPropagation) {
                         event.stopPropagation();
                     }
-                    this._pushCustomEvent(eventName, dataSchema, initiator);
+                    this._pushCustomEvent(eventName, dataSchema, elementToBind);
                 }
                 elementToBind.addEventListener("click", eventListener);
                 this.boundClickEventListeners.push(new BoundEventListener(elementToBind, eventListener, "click"));
