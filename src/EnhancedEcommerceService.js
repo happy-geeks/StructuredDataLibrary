@@ -1,4 +1,4 @@
-//version = "V 1.3.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+//version = "V 1.4.0 UNRELEASED" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
 
 class IndexDataSelector extends DataSelector {
     /**
@@ -104,10 +104,17 @@ class EnhancedEcommerceService {
         
         if(defaultEcommerceSchema){
             // The items array can include up to 200 elements.
-            data.length = Math.min(data.length, 200);
+            if (data != null) {
+                data.length = Math.min(data.length, 200);
+            }
             eventData.ecommerce = {};
-            eventData.ecommerce["items"] = data;
+            eventData.ecommerce["items"] = data | [];
         } else {
+            if (data == null) {
+                if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`No data was found for the Ecommerce object for '${eventName}'. Cancelling the data layer push.`);
+                return;
+            }
+
             // The items array can include up to 200 elements.
             if(data["items"] != null) {
                 data["items"].length = Math.min(data["items"].length, 200);

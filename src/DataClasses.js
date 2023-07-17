@@ -1,4 +1,8 @@
-//version = "V 1.2.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+//version = "V 1.3.0 UNRELEASED" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+
+window.StructuredDataLibrarySettings = {
+    DebugMode: false // When true warnings will be shown in the console if problems occured.
+}
 
 window.InputType = {
     Text: "text",
@@ -52,7 +56,7 @@ class DataSelector {
             return datas;
         }
 
-        console.log(`The data selector '${this.name}', using selector '${this.selector}', had no results for the collection.`);
+        if (window.StructuredDataLibrarySettings.DebugMode) if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had no results for the collection.`);
         return null;
     }
 
@@ -63,7 +67,7 @@ class DataSelector {
      */
     privateGetDataFromItem(item) {
         if(item == null) {
-            console.log(`The data selector '${this.name}', using selector '${this.selector}', had no item to retrieve data from.`);
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had no item to retrieve data from.`);
             return null;
         }
 
@@ -80,6 +84,12 @@ class DataSelector {
         if(this.inputType === InputType.Text) {
             return data;
         } else if(this.inputType === InputType.Number) {
+            // Check if the data is not null or undefined to prevent an exception when trying to replace.
+            if (data == null) {
+                if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had no value converted to a number. The selector had a result but no data could be retrieved from the element.`);
+                return null;
+            }
+
             data = data.replace(",-", "").replace(",", ".");
 
             // Check for a value with numbers behind a digit.
@@ -90,7 +100,7 @@ class DataSelector {
                     return Number(matchedNumbers[0]);
                 }
 
-                console.log(`The data selector '${this.name}', using selector '${this.selector}', had multiple decimal values converted to a number.`);
+                if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had multiple decimal values converted to a number.`);
                 return null;
             }
 
@@ -102,11 +112,11 @@ class DataSelector {
                     return Number(matchedNumbers[0]);
                 }
 
-                console.log(`The data selector '${this.name}', using selector '${this.selector}', had multiple values converted to a number.`);
+                if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had multiple values converted to a number.`);
                 return null;
             }
 
-            console.log(`The data selector '${this.name}', using selector '${this.selector}', had no value converted to a number.`);
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data selector '${this.name}', using selector '${this.selector}', had no value converted to a number.`);
             return null;
         }
     }
@@ -162,7 +172,7 @@ class DataSchema {
             const innerItemContainer = this.itemContainerSelector === "" ? itemContainer : itemContainer.querySelector(this.itemContainerSelector);
 
             if(innerItemContainer == null) {
-                console.log(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', did not find an element.`);
+                if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', did not find an element.`);
                 return null;
             }
 
@@ -183,7 +193,7 @@ class DataSchema {
             return datas;
         }
         
-        console.log(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', had no results for the collection.`);
+        if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', had no results for the collection.`);
         return null;
     }
 
@@ -210,7 +220,7 @@ class DataSchema {
         }
 
         if(invalidData) {
-            console.log(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', missed mandatory data.`);
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', missed mandatory data.`);
             return null;
         }
 
@@ -228,7 +238,7 @@ class DataSchema {
         }
 
         if(invalidData) {
-            console.log(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', missed mandatory schema.`);
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn(`The data schema '${this.name}', using selector '${this.itemContainerSelector}', missed mandatory schema.`);
             return null;
         }
 

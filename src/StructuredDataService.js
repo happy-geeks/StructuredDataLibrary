@@ -1,4 +1,4 @@
-//version = "V 1.0.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+//version = "V 1.1.0 UNRELEASED" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
 
 class StructuredDataSchema extends DataSchema {
     /**
@@ -41,7 +41,7 @@ class StructuredDataService {
     generateStructuredData(structuredDataScheme) {
         const structuredData = structuredDataScheme.getData(document);
         if(structuredData === null) {
-            console.log("Structured data failed to generate.");
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn("Structured data failed to generate.");
             return null;
         }
 
@@ -55,7 +55,7 @@ class StructuredDataService {
      */
     addStructuredDataToHead(structuredData) {
         if(structuredData === null) {
-            console.log("Provided structured data was null, could not add to header.");
+            if (window.StructuredDataLibrarySettings.DebugMode) console.warn("Provided structured data was null, could not add to header.");
             return;
         }
 
