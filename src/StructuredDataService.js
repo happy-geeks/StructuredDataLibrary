@@ -24,7 +24,7 @@ class StructuredDataSchema extends DataSchema {
     _getDataFromItemContainer(itemContainer) {
         const data = super._getDataFromItemContainer(itemContainer);
 
-        if(data === null) {
+        if (data === null) {
             return data;
         }
 
@@ -40,7 +40,7 @@ class StructuredDataService {
      */
     generateStructuredData(structuredDataScheme) {
         const structuredData = structuredDataScheme.getData(document);
-        if(structuredData === null) {
+        if (structuredData === null) {
             if (window.StructuredDataLibrarySettings.DebugMode) console.warn("Structured data failed to generate.");
             return null;
         }
@@ -54,7 +54,7 @@ class StructuredDataService {
      * @returns Ignores the structured data if it is null.
      */
     addStructuredDataToHead(structuredData) {
-        if(structuredData === null) {
+        if (structuredData === null) {
             if (window.StructuredDataLibrarySettings.DebugMode) console.warn("Provided structured data was null, could not add to header.");
             return;
         }
