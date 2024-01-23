@@ -1,4 +1,4 @@
-//version = "V 1.6.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+//version = "V 1.7.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
 
 class ConfiguratorChoiceSelector {
     /**
@@ -207,12 +207,12 @@ class EnhancedEcommerceConfiguratorService extends EnhancedEcommerceService {
     /**
      * Called when the configurator loaded the summary.
      * It will push the summary event.
-     * It will call the virtual pageview, step complete and next/previous step events.
+     * It will call next/previous step event.
      */
     privateSummaryLoaded() {
         try {            
             const currentStep = parseInt((new URLSearchParams(window.location.search)).get("confloc").split("-")[0]);
-            if (currentStep === _.size(jjl.configurator.mainSteps)) {
+            if (currentStep === jjl.configurator.mainSteps.length) {
                 this.privateNextPreviousStep(this.currentStep + 1);
                 this.privatePushConfiguratorEvent(this.eventNames.summary, this.getSummarySchema());    
             }
@@ -255,7 +255,7 @@ class EnhancedEcommerceConfiguratorService extends EnhancedEcommerceService {
     }
 
     /**
-     * It will push the steo complete event.
+     * It will push the step complete event.
      * @param {number} currentStep The step that the user is currently on.
      */
     privatePushStepComplete(currentStep) {
