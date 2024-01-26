@@ -1,4 +1,4 @@
-//version = "V 1.5.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
+//version = "V 1.6.0" Add UNRELEASED if the current version is not yet published to the CDN. When releasing remove UNRELEASED.
 
 class IndexDataSelector extends DataSelector {
     /**
@@ -148,8 +148,9 @@ class EnhancedEcommerceService {
      * @param {string} initiatorSelector The element that needs to initiate the click event, relative to the data schema item container or the item container if this value is empty.
      * @param {boolean} stopPropagation If set to true the 'stopPropagation' method of the click event will be called.
      * @param {Array} extraEventDataSchemas Extra dataschemas to add to the top object to be on the same level as the ecommerce object.
+     * @param {function} validationFunction A function to be called before pushing the event to add extra criteria.
      */
-    bindClickEcommerceEvent(eventName, dataSchema, initiatorSelector = "", defaultEcommerceSchema = true, stopPropagation = false, extraEventDataSchemas = null) {
+    bindClickEcommerceEvent(eventName, dataSchema, initiatorSelector = "", defaultEcommerceSchema = true, stopPropagation = false, extraEventDataSchemas = null, validationFunction = null) {
         try {
             const initiators = document.querySelectorAll(dataSchema.itemContainerSelector);
             initiators.forEach(initiator => {
@@ -160,6 +161,12 @@ class EnhancedEcommerceService {
                         if (stopPropagation) {
                             event.stopPropagation();
                         }
+
+                        // Skip event push if a validation function has been provided and it returned "false".
+                        if (validationFunction != null && !validationFunction(initiator)) {
+                            return;
+                        }
+
                         this.privatePushEcommerceEvent(eventName, dataSchema, elementToBind, defaultEcommerceSchema, extraEventDataSchemas);
                     }
                     elementToBind.addEventListener("click", eventListener);
@@ -201,9 +208,10 @@ class EnhancedEcommerceService {
      * @param {string} eventName The name of the event to be pushed when clicked.
      * @param {DataSchema} dataSchema The data schema to use.
      * @param {string} initiatorSelector The element that needs to initiate the click event, relative to the data schema item container or the item container if this value is empty.
-     * @param {boolean} stopPropagation If set to true the 'stopPropagation' method of the click event will be called. 
+     * @param {boolean} stopPropagation If set to true the 'stopPropagation' method of the click event will be called.
+     * @param {function} validationFunction A function to be called before pushing the event to add extra criteria.
      */
-    bindClickCustomEvent(eventName, dataSchema, initiatorSelector = "", stopPropagation = false) {
+    bindClickCustomEvent(eventName, dataSchema, initiatorSelector = "", stopPropagation = false, validationFunction = null) {
         try {
             const initiators = document.querySelectorAll(dataSchema.itemContainerSelector);
             initiators.forEach(initiator => {
@@ -214,6 +222,12 @@ class EnhancedEcommerceService {
                         if (stopPropagation) {
                             event.stopPropagation();
                         }
+
+                        // Skip event push if a validation function has been provided and it returned "false".
+                        if (validationFunction != null && !validationFunction(initiator)) {
+                            return;
+                        }
+
                         this.privatePushCustomEvent(eventName, dataSchema, elementToBind);
                     }
                     elementToBind.addEventListener("click", eventListener);
