@@ -5,9 +5,6 @@
 - **Language(s)**: JavaScript (ES6+)
 - **Framework(s)**: Vanilla JavaScript
 - **Database**: None (client-side only)
-- **Status**: Active
-- **Critical Level**: High
-- **Last Updated**: 2025-10-01
 - **Version**: Multiple modules (v1.2.0 - v1.7.0)
 
 ## Purpose & Context
