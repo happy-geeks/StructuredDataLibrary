@@ -132,31 +132,19 @@ console.log(JSON.stringify(data, null, 2));
 - Verify currentStep is updating
 - Check schemas return valid data
 
-## Known Issues & Technical Debt
-
-- No TypeScript support
-- Manual minification process
-- No automated test suite
-- Browser compatibility requires modern JavaScript
-- Multiple active versions create dependency complexity
-
 ## Original Documentation
 
-> # StructuredDataLibrary
-> JavaScript library for the generation of structured data and enhanced ecommerce events based on query selectors.
->
-> ## DataClasses
-> https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-DataClasses-1.4.1.min.js
->
-> ## StructuredDataService
-> https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-StructuredDataService-1.2.0.min.js
->
-> ## EnhancedEcommerceService
-> https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-EnhancedEcommerceService-1.6.0.min.js
->
-> ## EnhancedEcommerceConfiguratorService
-> https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-EnhancedEcommerceConfiguratorService-1.7.0.min.js
+# StructuredDataLibrary
+JavaScript library for the generation of structured data and enhanced ecommerce events based on query selectors.
 
----
+## DataClasses
+https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-DataClasses-1.4.1.min.js
 
-*This documentation is part of the Wiser Platform knowledge base maintained by Happy Horizon B.V.*
+## StructuredDataService
+https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-StructuredDataService-1.2.0.min.js
+
+## EnhancedEcommerceService
+https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-EnhancedEcommerceService-1.6.0.min.js
+
+## EnhancedEcommerceConfiguratorService
+https://cdn.jsdelivr.net/gh/happy-geeks/StructuredDataLibrary@main/versions/StructuredDataLibrary-EnhancedEcommerceConfiguratorService-1.7.0.min.js
